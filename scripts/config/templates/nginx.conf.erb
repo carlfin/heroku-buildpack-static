@@ -84,6 +84,20 @@ http {
     }
   <% end %>
 
+  # priority redirects named match (prepend flag!)
+  <% redirects.each do |path, hash| %>
+    <% next unless hash['prepend'] %>
+    <% if hash['regex'] %>
+      location ~ <%= path %> {
+        return <%= hash['status'] || 301 %> <%= hash['url'] %>;
+      }
+    <% else %>
+      location @<%= path %> {
+        return <%= hash['status'] || 301 %> <%= hash['url'] %>;
+      }
+    <% end %>
+  <% end %>
+
   <% routes.each do |route, path| %>
     location ~ ^<%= route %>$ {
       set $route <%= route %>;
