@@ -144,4 +144,20 @@ http {
   <% end %>
 
   }
+
+  # vhosts with full redirect (to single url)
+  <% redirect_servers.each do |hostname, hash| %>
+  server {
+    listen <%= port %>;
+    charset <%= encoding %>;
+    port_in_redirect off;
+    keepalive_timeout 5;
+    root <%= root %>;
+    server_name <%= hostname %>;
+
+    location / {
+      return <%= hash['status'] || 301 %> <%= hash['url'] %>;
+    }
+  }
+  <% end %>
 }

@@ -63,6 +63,8 @@ class NginxConfig
       json["redirects"][loc].merge!("url" => NginxConfigUtil.interpolate(hash["url"], ENV))
     end
 
+    json["redirect_servers"] ||= {}
+
     json["error_page"] ||= nil
     json["debug"] = ENV['STATIC_DEBUG']
 
