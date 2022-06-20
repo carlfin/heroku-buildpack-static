@@ -156,11 +156,7 @@ http {
     server_name <%= hostname %>;
 
     location / {
-      <% if hash['with_uri'] %>
-        return <%= hash['status'] || 301 %> <%= hash['url'] %>$request_uri;
-      <% else %>
-        return <%= hash['status'] || 301 %> <%= hash['url'] %>;
-      <% end %>
+      return <%= hash['status'] || 301 %> <%= hash['url'] %>;
     }
   }
   <% end %>

@@ -155,7 +155,6 @@ By default if redirect option is used, it will redirect all requests matching th
 can be used
 `url` parameter should be passed along in order to describe which url to redirect
 `status` is an optional parameter, 301 is the default value
-`with_uri` is used in order to redirect with uri as well. E.g https://host.me/some-resource.html => https://host.new/some-resource.html
 
 
 ```json
@@ -164,10 +163,6 @@ can be used
     "host.me": {
       "status": 301,
       "url": "https://host.new"
-    },
-    "host.com": {
-      "url": "https://host.new",
-      "with_uri": true
     }
   }
 }
