@@ -149,6 +149,30 @@ If you would like to use [nginx regex locations](https://nginx.org/en/docs/http/
 
 as you can see in the example this is quite useful when migrating a subfolder to a new subdomain but still allowing you to keep part of the url structure.
 
+#### Server redirects
+
+By default if redirect option is used, it will redirect all requests matching that pattern. If only given domain is required to be redirected `redirect_servers` option
+can be used
+`url` parameter should be passed along in order to describe which url to redirect
+`status` is an optional parameter, 301 is the default value
+`with_uri` is used in order to redirect with uri as well. E.g https://host.me/some-resource.html => https://host.new/some-resource.html
+
+
+```json
+{
+  "redirect_servers": {
+    "host.me": {
+      "status": 301,
+      "url": "https://host.new"
+    },
+    "host.com": {
+      "url": "https://host.new",
+      "with_uri": true
+    }
+  }
+}
+```
+
 ##### Interpolating Env Var Values
 It's common to want to be able to test the frontend against various backends. The `url` key supports environment variable substitution using `${ENV_VAR_NAME}`. For instance, if there was a staging and production Heroku app for your API, you could setup the config above like the following:
 
